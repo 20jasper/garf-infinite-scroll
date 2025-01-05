@@ -1,48 +1,80 @@
-const OFFSET = 80;
-const SRC = "./garfbody7.webp";
-const ALT = "the body of an orange and black cat";
-const html = document.querySelector("html");
-const contentContainer = document.querySelector("#list");
-const garfMetersCount = document.querySelector("#garfmeters-counter");
+const SELECTORS = {
+  html: document.querySelector("html"),
+  contentContainer: document.querySelector("#list"),
+  garfMetersCount: document.querySelector("#garfmeters-counter"),
+  observable: document.querySelector(".observable"),
+};
 
-const garfBody = () => {
+const GARF_BODY_IMAGE = {
+  src: "./garfbody7.webp",
+  alt: "the body of an orange and black cat",
+};
+const GARF_FOOT_IMAGE = {
+  src: "./garfoot8.webp",
+  alt: "a singular foot of garfield",
+};
+const MIN_GARFMETERS = 5000;
+
+const garfBody = ({ src, alt }) => {
   const li = document.createElement("li");
 
   const img = document.createElement("img");
-  img.src = SRC;
-  img.alt = ALT;
+  img.src = src;
+  img.alt = alt;
 
   li.appendChild(img);
   return li;
 };
 
+const intersectionObserver = new IntersectionObserver(([observer]) => {
+  if (!observer.isIntersecting) return;
+
+  console.debug("append some garfs");
+  for (let i = 0; i < 10; i++) {
+    SELECTORS.contentContainer.appendChild(garfBody(GARF_BODY_IMAGE));
+  }
+});
+intersectionObserver.observe(SELECTORS.observable);
+
+const GARF_BODY_HEIGHT = 159;
+const loops =
+  2 *
+  Math.ceil(SELECTORS.html.getBoundingClientRect().bottom / GARF_BODY_HEIGHT);
+
+for (let i = 0; i < loops; i++) {
+  SELECTORS.contentContainer.appendChild(garfBody(GARF_BODY_IMAGE));
+}
+
 const updateGarfMeters = (() => {
   let garfMeters = 0;
   return () => {
     garfMeters += 1;
-    garfMetersCount.textContent = garfMeters;
+    SELECTORS.garfMetersCount.textContent = garfMeters;
+    return garfMeters;
   };
 })();
 
-window.addEventListener("scroll", () => {
-  updateGarfMeters();
-});
+updateGarfMeters();
 
-const intersectionObserver = new IntersectionObserver((entries) => {
-  console.debug(entries);
-  if (entries[0].intersectionRatio <= 0) return;
+const scrollHandler = (() => {
+  let foundFoot = false;
+  return () => {
+    if (
+      updateGarfMeters() > MIN_GARFMETERS &&
+      Math.random() > 0.9 &&
+      !foundFoot
+    ) {
+      intersectionObserver.unobserve(SELECTORS.observable);
 
-  console.debug("append some garfs");
-  for (let i = 0; i < 10; i++) {
-    contentContainer.appendChild(garfBody());
-  }
-});
-intersectionObserver.observe(document.querySelector(".observable"));
+      SELECTORS.contentContainer.appendChild(garfBody(GARF_FOOT_IMAGE));
 
-const GARF_BODY_HEIGHT = 159;
-const loops =
-  2 * Math.ceil(html.getBoundingClientRect().bottom / GARF_BODY_HEIGHT);
+      const congrats = document.createElement("p");
+      congrats.textContent =
+        "Congratulations! You found the fabled Garfoot! What you do with the unparalleled power you've just gained is up to you";
+      SELECTORS.contentContainer.appendChild(congrats);
 
-for (let i = 0; i < loops; i++) {
-  contentContainer.appendChild(garfBody());
-}
+      foundFoot = true;
+    }
+  };
+})();
+window.addEventListener("scroll", scrollHandler);

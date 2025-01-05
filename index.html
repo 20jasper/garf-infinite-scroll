@@ -11,19 +11,20 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        padding: 2rem;
         height: 100vh;
       }
       img {
         width: min(100%, 50rem);
       }
       p {
-        text-align: center;
         background-color: black;
         color: white;
         font-size: 2rem;
+        width: 60ch;
+        margin: 0.5rem auto;
+        text-align: center;
       }
-      #garf-score-p {
+      #garf-score-div {
         position: fixed;
         top: 0;
       }
@@ -37,6 +38,7 @@
         flex-direction: column;
         align-items: center;
         width: 100%;
+        padding-block: 5rem;
       }
       #list li {
         display: flex;
@@ -51,15 +53,20 @@
         position: absolute;
         height: 220px;
         top: -400px;
+        visibility: hidden;
       }
     </style>
     <script src="/script.js" defer></script>
   </head>
 
   <body>
-    <p id="garf-score-p">
-      You've scrolled <span id="garfmeters-counter">0</span> garfmeters
-    </p>
+    <div id="garf-score-div">
+      <p>
+        Legends say the garfoot will reveal itself to only those with the most
+        unwavering resolve. Will you be one of the few deemed worthy?
+      </p>
+      <p>You've scrolled <span id="garfmeters-counter">0</span> garfmeters</p>
+    </div>
 
     <footer class="p-4">
       <p>&copy; 2025 Jacob Asper</p>
@@ -71,7 +78,6 @@
     </ol>
     <div class="more">
       <p class="observable"></p>
-      observe me
     </div>
   </body>
 </html>
