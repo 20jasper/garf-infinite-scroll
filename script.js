@@ -1,15 +1,19 @@
-const OFFSET = 500;
+const OFFSET = 80;
 const SRC = "./garfbody7.webp";
 const ALT = "the body of an orange and black cat";
 const html = document.querySelector("html");
-const body = document.querySelector("body");
+const contentContainer = document.querySelector("#list");
 const garfMetersCount = document.querySelector("#garfmeters-counter");
 
 const garfBody = () => {
+  const li = document.createElement("li");
+
   const img = document.createElement("img");
   img.src = SRC;
   img.alt = ALT;
-  return img;
+
+  li.appendChild(img);
+  return li;
 };
 
 const updateGarfMeters = (() => {
@@ -21,20 +25,24 @@ const updateGarfMeters = (() => {
 })();
 
 window.addEventListener("scroll", () => {
-  const { bottom } = html.getBoundingClientRect();
-  const { clientHeight } = html;
-  console.debug({ bottom, scrollLimit: clientHeight + OFFSET });
-
-  if (bottom < clientHeight + OFFSET) {
-    console.log("at bottom");
-    body.appendChild(garfBody());
-    updateGarfMeters();
-  }
+  updateGarfMeters();
 });
 
+const intersectionObserver = new IntersectionObserver((entries) => {
+  console.debug(entries);
+  if (entries[0].intersectionRatio <= 0) return;
+
+  console.debug("append some garfs");
+  for (let i = 0; i < 10; i++) {
+    contentContainer.appendChild(garfBody());
+  }
+});
+intersectionObserver.observe(document.querySelector(".observable"));
+
 const GARF_BODY_HEIGHT = 159;
-const loops = Math.ceil(html.getBoundingClientRect().bottom / GARF_BODY_HEIGHT);
+const loops =
+  2 * Math.ceil(html.getBoundingClientRect().bottom / GARF_BODY_HEIGHT);
 
 for (let i = 0; i < loops; i++) {
-  body.appendChild(garfBody());
+  contentContainer.appendChild(garfBody());
 }

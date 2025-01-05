@@ -31,6 +31,27 @@
         position: fixed;
         bottom: 0;
       }
+
+      #list {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+      }
+      #list li {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+      }
+
+      .more {
+        position: relative;
+      }
+      .observable {
+        position: absolute;
+        height: 220px;
+        top: -400px;
+      }
     </style>
     <script src="/script.js" defer></script>
   </head>
@@ -43,6 +64,14 @@
     <footer class="p-4">
       <p>&copy; 2025 Jacob Asper</p>
     </footer>
-    <img src="garfhead.webp" alt="garfield's head" />
+    <ol id="list">
+      <li>
+        <img src="garfhead.webp" alt="garfield's head" />
+      </li>
+    </ol>
+    <div class="more">
+      <p class="observable"></p>
+      observe me
+    </div>
   </body>
 </html>
