@@ -71,7 +71,9 @@ const scrollHandler = (() => {
       const congrats = document.createElement("p");
       congrats.textContent =
         "Congratulations! You found the fabled Garfoot! What you do with the unparalleled power you've just gained is up to you";
-      SELECTORS.contentContainer.appendChild(congrats);
+      const li = document.createElement("li");
+      li.appendChild(congrats);
+      SELECTORS.contentContainer.appendChild(li);
 
       foundFoot = true;
     }
