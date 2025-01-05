@@ -31,3 +31,10 @@ window.addEventListener("scroll", () => {
     updateGarfMeters();
   }
 });
+
+const GARF_BODY_HEIGHT = 159;
+const loops = Math.ceil(html.getBoundingClientRect().bottom / GARF_BODY_HEIGHT);
+
+for (let i = 0; i < loops; i++) {
+  body.appendChild(garfBody());
+}
