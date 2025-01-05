@@ -17,13 +17,19 @@
       img {
         width: min(100%, 50rem);
       }
-      #garf-score-p {
-        position: fixed;
-        top: 0;
+      p {
         text-align: center;
         background-color: black;
         color: white;
         font-size: 2rem;
+      }
+      #garf-score-p {
+        position: fixed;
+        top: 0;
+      }
+      footer {
+        position: fixed;
+        bottom: 0;
       }
     </style>
     <script src="/script.js" defer></script>
@@ -33,6 +39,10 @@
     <p id="garf-score-p">
       You've scrolled <span id="garfmeters-counter">0</span> garfmeters
     </p>
+
+    <footer class="p-4">
+      <p>&copy; 2025 Jacob Asper</p>
+    </footer>
     <img src="garfhead.webp" alt="garfield's head" />
   </body>
 </html>
