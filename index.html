@@ -70,13 +70,26 @@
 
   <body>
     <div id="garf-score-div">
+      <p>You've scrolled <span id="garfmeters-counter">0</span> garfmeters</p>
+    </div>
+
+    <dialog open>
       <p>
         Legends say the garfoot will reveal itself to only those with the most
         unwavering resolve. Will you be one of the few deemed worthy?
       </p>
-      <p>You've scrolled <span id="garfmeters-counter">0</span> garfmeters</p>
+      <form method="dialog">
+        <button type="submit">close</button>
+      </form>
+    </dialog>
+    <ol id="list">
+      <li>
+        <img src="garfhead.webp" alt="garfield's head" />
+      </li>
+    </ol>
+    <div class="more">
+      <p class="observable"></p>
     </div>
-
     <footer class="p-4">
       <p>
         &copy; 2025 <a href="https://jacobasper.com/">Jacob Asper</a>. &copy;
@@ -86,13 +99,5 @@
         Sterling Jefferson
       </p>
     </footer>
-    <ol id="list">
-      <li>
-        <img src="garfhead.webp" alt="garfield's head" />
-      </li>
-    </ol>
-    <div class="more">
-      <p class="observable"></p>
-    </div>
   </body>
 </html>
