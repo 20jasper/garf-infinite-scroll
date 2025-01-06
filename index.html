@@ -9,6 +9,9 @@
       * {
         box-sizing: border-box;
       }
+      html {
+        overflow-y: hidden;
+      }
       body {
         margin-inline: auto;
         display: flex;
@@ -78,7 +81,7 @@
         Legends say the garfoot will reveal itself to only those with the most
         unwavering resolve. Will you be one of the few deemed worthy?
       </p>
-      <form method="dialog">
+      <form method="dialog" id="start-form">
         <button type="submit">close</button>
       </form>
     </dialog>

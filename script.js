@@ -80,3 +80,7 @@ const scrollHandler = (() => {
   };
 })();
 window.addEventListener("scroll", scrollHandler);
+
+document.querySelector("#start-form").addEventListener("submit", () => {
+  SELECTORS.html.style.overflowY = "auto";
+});
