@@ -14,8 +14,26 @@ const GARF_FOOT_IMAGE = {
   src: "./garfoot8.webp",
   alt: "a singular foot of garfield",
 };
-const MIN_GARFMETERS = 5000;
+const facts = [
+  {
+    src: "garftanic.png",
+    alt: "garfield next to the titanic",
+    description: "Garfield sunk the titanic 1004 garfmeters under sea level",
+  },
+  {
+    src: "https://media1.tenor.com/m/s96Vt-iwxwEAAAAd/garfiel-garfield.gif",
+    alt: "dancing garfield",
+    description: "Garfield sunk the titanic 1004 garfmeters under sea level",
+  },
+  {
+    src: "tattoo.png",
+    alt: "heart tattoo with the word mom",
+    description: "Garfield got their first garftoos at age 22 in cat years",
+  },
+];
+const MIN_GARFMETERS_BEFORE_FOOT = 5000;
 const PIXELS_PER_GARF_METER = 100;
+const MAX_METERS_BEFORE_FACT = 500;
 
 const garfBody = ({ src, alt }) => {
   const li = document.createElement("li");
@@ -74,19 +92,6 @@ function getGarfFact({ src, alt, description }) {
   return figure;
 }
 
-const facts = [
-  {
-    src: "garftanic.png",
-    alt: "garfield next to the titanic",
-    description: "Garfield sunk the titanic 1004 garfmeters under sea level",
-  },
-  {
-    src: "https://media1.tenor.com/m/s96Vt-iwxwEAAAAd/garfiel-garfield.gif",
-    alt: "dancing garfield",
-    description: "Garfield sunk the titanic 1004 garfmeters under sea level",
-  },
-];
-
 function* garfFactFigureGenerator(facts) {
   for (const x of facts.map(getGarfFact)) {
     yield x;
@@ -96,9 +101,15 @@ const garfFactFigureGen = garfFactFigureGenerator(facts);
 
 const scrollHandler = (() => {
   let foundFoot = false;
+  let lastAddedFactCoord = 0;
   return () => {
     SELECTORS.garfMetersCount.textContent = getGarfMeters().toFixed(3);
-    if (getGarfMeters() > MIN_GARFMETERS && Math.random() > 0.9 && !foundFoot) {
+
+    if (
+      getGarfMeters() > MIN_GARFMETERS_BEFORE_FOOT &&
+      Math.random() > 0.9 &&
+      !foundFoot
+    ) {
       intersectionObserver.unobserve(SELECTORS.observable);
 
       SELECTORS.contentContainer.appendChild(garfBody(GARF_FOOT_IMAGE));
@@ -111,12 +122,16 @@ const scrollHandler = (() => {
       SELECTORS.contentContainer.appendChild(li);
 
       foundFoot = true;
-    } else if (Math.random() > 0.999 && getGarfMeters() > 100) {
+    } else if (
+      lastAddedFactCoord - getGarfMeters() > MAX_METERS_BEFORE_FACT ||
+      (lastAddedFactCoord + 100 < getGarfMeters() && Math.random() > 0.999)
+    ) {
       const { done, value } = garfFactFigureGen.next();
       console.log("add garf fact", { done, value });
       if (done) {
         return;
       }
+      lastAddedFactCoord = getGarfMeters();
       value.style.position = "absolute";
       value.style.bottom = `${-(Math.trunc(window.scrollY) + 1000)}px`;
       document.querySelector("#fact-container").appendChild(value);
