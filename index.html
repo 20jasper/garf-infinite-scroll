@@ -22,7 +22,8 @@
       img {
         width: min(100%, 50rem);
       }
-      p {
+      p,
+      figcaption {
         background-color: black;
         color: white;
         font-size: 2rem;
@@ -67,6 +68,10 @@
         top: -400px;
         visibility: hidden;
       }
+      #fact-container {
+        position: relative;
+        width: 25rem;
+      }
     </style>
     <script src="/script.js" defer></script>
   </head>
@@ -75,6 +80,8 @@
     <div id="garf-score-div">
       <p>You've scrolled <span id="garfmeters-counter">0</span> garfmeters</p>
     </div>
+
+    <div id="fact-container"></div>
 
     <dialog open>
       <p>
