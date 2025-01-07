@@ -74,6 +74,7 @@ getGarfMeters();
 
 document.querySelector("#start-form").addEventListener("submit", () => {
   SELECTORS.html.style.overflowY = "auto";
+  document.querySelector("#garf-score-div").classList.remove("hidden");
 });
 
 function getGarfFact({ src, alt, description }) {
