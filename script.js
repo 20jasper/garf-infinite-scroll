@@ -123,7 +123,7 @@ const scrollHandler = (() => {
 
       foundFoot = true;
     } else if (
-      lastAddedFactCoord - getGarfMeters() > MAX_METERS_BEFORE_FACT ||
+      getGarfMeters() - lastAddedFactCoord > MAX_METERS_BEFORE_FACT ||
       (lastAddedFactCoord + 100 < getGarfMeters() && Math.random() > 0.999)
     ) {
       const { done, value } = garfFactFigureGen.next();
