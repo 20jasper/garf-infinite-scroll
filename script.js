@@ -8,11 +8,11 @@ const SELECTORS = {
 
 const GARF_BODY_IMAGE = {
   src: "./garfbody7.webp",
-  alt: "the body of an orange and black cat",
+  alt: "",
 };
 const GARF_FOOT_IMAGE = {
   src: "./garfoot8.webp",
-  alt: "a singular foot of garfield",
+  alt: "",
 };
 const facts = [
   {
