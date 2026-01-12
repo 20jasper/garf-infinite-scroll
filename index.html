@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -82,27 +82,29 @@
   </head>
 
   <body>
-    <div id="garf-score-div" class="hidden">
-      <p>You've scrolled <span id="garfmeters-counter">0</span> garfmeters</p>
-    </div>
+    <main>
+      <div id="garf-score-div" class="hidden" aria-live="polite">
+        <p>You've scrolled <span id="garfmeters-counter">0</span> garfmeters</p>
+      </div>
 
-    <div id="fact-container"></div>
+      <div id="fact-container"></div>
 
-    <dialog open>
-      <p>
-        Legends say the garfoot will reveal itself to only those with the most
-        unwavering resolve. Will you be one of the few deemed worthy?
-      </p>
-      <form method="dialog" id="start-form">
-        <button type="submit">close</button>
-      </form>
-    </dialog>
-    <div id="list">
+      <dialog open>
+        <p>
+          Legends say the garfoot will reveal itself to only those with the most
+          unwavering resolve. Will you be one of the few deemed worthy?
+        </p>
+        <form method="dialog" id="start-form">
+          <button type="submit">close</button>
+        </form>
+      </dialog>
+      <div id="list">
         <img src="garfhead.webp" alt="garfield's head" />
-    </div>
-    <div class="more">
-      <p class="observable"></p>
-    </div>
+      </div>
+      <div class="more">
+        <p class="observable"></p>
+      </div>
+    </main>
     <footer class="p-4">
       <p>
         &copy; 2025 <a href="https://jacobasper.com/">Jacob Asper</a>. &copy;
