@@ -91,6 +91,27 @@ function getGarfFact({ src, alt, description }) {
   return figure;
 }
 
+function debounce(fn, delay) {
+  let timeoutId;
+  return (...args) => {
+    if (timeoutId) {
+      clearTimeout(timeoutId);
+    }
+    timeoutId = setTimeout(() => {
+      fn(...args);
+    }, delay);
+  };
+}
+
+const setAriaPolite = (val) => {
+  SELECTORS.garfMetersCount.setAttribute("aria-live", val);
+};
+
+const announceGarfMetersDebounced = debounce((val) => {
+  setAriaPolite(val);
+  SELECTORS.garfMetersCount.textContent = getGarfMeters().toFixed(3);
+}, 1500);
+
 function* garfFactFigureGenerator(facts) {
   for (const x of facts.map(getGarfFact)) {
     yield x;
@@ -103,6 +124,9 @@ const scrollHandler = (() => {
   let lastAddedFactCoord = 0;
   return () => {
     SELECTORS.garfMetersCount.textContent = getGarfMeters().toFixed(3);
+
+    setAriaPolite("off");
+    announceGarfMetersDebounced("polite");
 
     if (
       getGarfMeters() > MIN_GARFMETERS_BEFORE_FOOT &&
