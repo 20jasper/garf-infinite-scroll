@@ -1,5 +1,6 @@
 const SELECTORS = {
   html: document.querySelector("html"),
+  dialog: document.querySelector("dialog"),
   contentContainer: document.querySelector("#list"),
   garfMetersCount: document.querySelector("#garfmeters-counter"),
   observable: document.querySelector(".observable"),
@@ -137,3 +138,5 @@ const scrollHandler = (() => {
 
 scrollHandler();
 window.addEventListener("scroll", scrollHandler);
+
+SELECTORS.dialog.showModal();
