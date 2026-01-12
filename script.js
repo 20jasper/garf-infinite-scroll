@@ -36,14 +36,11 @@ const PIXELS_PER_GARF_METER = 100;
 const MAX_METERS_BEFORE_FACT = 500;
 
 const garfBody = ({ src, alt }) => {
-  const li = document.createElement("li");
-
   const img = document.createElement("img");
   img.src = src;
   img.alt = alt;
 
-  li.appendChild(img);
-  return li;
+  return img;
 };
 
 const intersectionObserver = new IntersectionObserver(([observer]) => {
@@ -118,9 +115,7 @@ const scrollHandler = (() => {
       const congrats = document.createElement("p");
       congrats.textContent =
         "Congratulations! You found the fabled Garfoot! What you do with the unparalleled power you've just gained is up to you";
-      const li = document.createElement("li");
-      li.appendChild(congrats);
-      SELECTORS.contentContainer.appendChild(li);
+      SELECTORS.contentContainer.appendChild(congrats);
 
       foundFoot = true;
     } else if (
